@@ -1,0 +1,11 @@
+{
+  "base_sha": "bb52dd3f9f4491115ab4305fb7d97d59dd290d62",
+  "fingerprint": "d3a88c347a12ae05c7b7576044547a33a6fc50614fefd81bab4cd0c8e52770a1",
+  "inventory_key": "example_go_pilot",
+  "profile": "go",
+  "repository_id": 1416571064,
+  "schema_version": 1,
+  "source_run": "https://github.com/tyler180/github-infra/actions/runs/38359490555",
+  "source_sha": "6ec3d0adb8de698830e5a40f5bdb1f7cf6372d32",
+  "tooling_sha": "0ecbb0fcaea1deb8a8617a51d719b821500e873f"
+}
