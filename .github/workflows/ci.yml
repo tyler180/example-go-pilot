@@ -1,0 +1,13 @@
+name: CI
+on:
+  pull_request:
+  push:
+  merge_group:
+permissions:
+  contents: read
+jobs:
+  validation:
+    uses: tyler180/github-workflows/.github/workflows/go-validate.yml@0ecbb0fcaea1deb8a8617a51d719b821500e873f
+    with:
+      go-version: '1.26.5'
+      tooling-ref: '0ecbb0fcaea1deb8a8617a51d719b821500e873f'
