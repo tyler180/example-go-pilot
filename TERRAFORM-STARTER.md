@@ -2,7 +2,7 @@
 
 These additive callers use Terraform 1.15.0 in
 `terraform` and shared workflow revision
-`c46168073f7f968cfe6f9f7e26b1fcc7ab0708fd`. They do not create Terraform resources or replace
+`fc12894f6da97bb6bc4c9a8e407d31fadd51a401`. They do not create Terraform resources or replace
 application CI, source code, CODEOWNERS, hooks, or existing Terraform.
 
 Both callers are disabled until explicitly configured. Deployment is manual only.
@@ -29,6 +29,7 @@ build inputs even when no `.tf` file changes. Fork PR plans are skipped.
    | `TERRAFORM_STATE_ID` | Unique state identifier within this repo |
    | `TERRAFORM_ENVIRONMENT` | Protected deployment environment name |
    | `TERRAFORM_AWS_REGION` | AWS region; defaults to `us-west-2` |
+   | `TERRAFORM_ECR_REGISTRY` | Optional account ECR registry address for Docker builds |
    | `TERRAFORM_ENABLED` | `true` only after setup, to enable PR plans |
    | `TERRAFORM_DEPLOY_ENABLED` | `true` only when ready for manual deployment |
 
@@ -38,7 +39,15 @@ build inputs even when no `.tf` file changes. Fork PR plans are skipped.
 
 ## Terraform-driven Docker builds
 
-If Terraform builds/pushes an image, the plan may execute external build steps.
+If Terraform builds/pushes an ECR image, set `TERRAFORM_ECR_REGISTRY` to its account
+registry address. The shared workflows log Docker in using each job's AWS role.
+Configure the Docker provider's `registry_auth` with `address` and
+`config_file = pathexpand("~/.docker/config.json")`. Do not use a plan-time
+`aws_ecr_authorization_token` password or config file contents in the provider:
+a saved plan can otherwise replay the read-only plan role's token during apply.
+The runtime Docker credential file stays outside the Terraform artifact bundle.
+
+The plan may execute external build steps.
 Check whether the modules require ECR writes during planning; a purely read-only
 plan role may be insufficient. Shared deployment checks out the triggering commit
 in both jobs, restoring the Terraform plan bundle for apply, so sibling Go files

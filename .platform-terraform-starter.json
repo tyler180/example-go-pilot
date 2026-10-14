@@ -1,15 +1,17 @@
 {
-  "base_sha": "06c322345698807832f0582b68c92525c3285616",
+  "base_sha": "11d576a9c8d213c029c8bbb35ce4f9e4c4d5e796",
   "config": {
     "terraform_version": "1.15.0",
-    "workflow_ref": "c46168073f7f968cfe6f9f7e26b1fcc7ab0708fd",
+    "workflow_ref": "fc12894f6da97bb6bc4c9a8e407d31fadd51a401",
     "working_directory": "terraform"
   },
-  "fingerprint": "438497fc9860e7ebbb373b84aa9358efb68b9dfd420e55ae356ef3e877ab0e7a",
+  "fingerprint": "e4dc2d1fb130c1794f18238e470e4cf7bf47d1f4c75b2b091003c13d6981e0a0",
   "inventory_key": "example_go_pilot",
+  "previous_fingerprint": "438497fc9860e7ebbb373b84aa9358efb68b9dfd420e55ae356ef3e877ab0e7a",
   "repository_id": 1416571064,
   "schema_version": 1,
-  "source_ref": "v0.1.0-rc.4",
+  "source_ref": "v0.1.0-rc.5",
   "source_run": "https://github.com/tyler180/github-infra/actions/runs/38497108794",
-  "source_sha": "83b144ac485786c842259d84596b090368e0ec76"
+  "source_sha": "617b62433ff61c137ce9e05974d01cee6752f5ec",
+  "upgrade_reason": "Reviewed correction to use fresh ECR credentials from each job role"
 }
