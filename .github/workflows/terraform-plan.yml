@@ -1,0 +1,16 @@
+name: Terraform PR plan
+on:
+  pull_request:
+permissions:
+  contents: read
+  id-token: write
+jobs:
+  plan:
+    if: vars.TERRAFORM_ENABLED == 'true' && github.event.pull_request.head.repo.full_name == github.repository
+    uses: tyler180/github-workflows/.github/workflows/terraform-plan.yml@c46168073f7f968cfe6f9f7e26b1fcc7ab0708fd
+    with:
+      terraform-version: '1.15.0'
+      working-directory: 'terraform'
+      aws-region: ${{ vars.TERRAFORM_AWS_REGION || 'us-west-2' }}
+      state-id: ${{ vars.TERRAFORM_STATE_ID }}
+      plan-role-arn: ${{ vars.TERRAFORM_PLAN_ROLE_ARN }}
