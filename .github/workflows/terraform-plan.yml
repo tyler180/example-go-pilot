@@ -7,7 +7,7 @@ permissions:
 jobs:
   plan:
     if: vars.TERRAFORM_ENABLED == 'true' && github.event.pull_request.head.repo.full_name == github.repository
-    uses: tyler180/github-workflows/.github/workflows/terraform-plan.yml@c46168073f7f968cfe6f9f7e26b1fcc7ab0708fd
+    uses: tyler180/github-workflows/.github/workflows/terraform-plan.yml@fc12894f6da97bb6bc4c9a8e407d31fadd51a401
     with:
       terraform-version: '1.15.0'
       working-directory: 'terraform'
