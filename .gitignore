@@ -2,3 +2,9 @@
 /bin/
 /coverage.out
 .DS_Store
+
+# Terraform downloads, local state, and saved plans
+**/.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
