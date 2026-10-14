@@ -2,7 +2,7 @@
 
 These additive callers use Terraform 1.15.0 in
 `terraform` and shared workflow revision
-`fc12894f6da97bb6bc4c9a8e407d31fadd51a401`. They do not create Terraform resources or replace
+`v2.3.0-rc.4`. They do not create Terraform resources or replace
 application CI, source code, CODEOWNERS, hooks, or existing Terraform.
 
 Both callers are disabled until explicitly configured. Deployment is manual only.
