@@ -10,6 +10,7 @@ func main() {
 	name := flag.String("name", "Go pilot", "name to greet")
 	flag.Parse()
 	fmt.Println(greeting(*name))
+	fmt.Println("testing a change")
 }
 
 func greeting(name string) string {

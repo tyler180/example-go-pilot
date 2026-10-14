@@ -1,0 +1,21 @@
+FROM golang:1.26 AS build
+WORKDIR /src/example-go-pilot
+# Copy go modules first to leverage layer caching
+COPY example-go-pilot/go.mod example-go-pilot/go.sum ./
+RUN go mod edit -replace github.com/tyler180/example-go-pilot=/src/dynasty-ff-models \
+    && go mod download
+
+# Copy source
+COPY example-go-pilot/main.go ./
+
+# Build the Lambda custom runtime bootstrap with minimal symbol info.
+ENV CGO_ENABLED=0
+RUN GOOS=linux GOARCH=amd64 go build -tags lambda.norpc -trimpath -ldflags "-s -w" -o /out/bootstrap ./
+
+FROM public.ecr.aws/lambda/provided:al2.2026.09.17.11
+COPY --from=build /out/bootstrap ./bootstrap
+COPY --from=build /out/mfl-mcp ./mfl-mcp
+COPY --from=build /src/dynasty-ff-backend/config ./config
+# Use an unprivileged UID/GID when running outside Lambda as well.
+USER 10001:10001
+ENTRYPOINT ["./bootstrap"]
