@@ -1,9 +1,12 @@
 repos:
   - repo: https://github.com/tyler180/github-workflows
-    rev: 'v2.3.0-rc.1'
+    rev: 'v2.3.0-rc.5'
     hooks:
       - id: repository-hygiene
       - id: secret-scan
+      - id: codex-review
+        stages: [pre-push]
+        verbose: true
   - repo: local
     hooks:
       - id: go-validation
