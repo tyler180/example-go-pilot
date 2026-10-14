@@ -5,14 +5,15 @@ data "aws_caller_identity" "this" {}
 data "aws_ecr_authorization_token" "token" {}
 
 locals {
-  name      = "go-test"
+  name      = "example-go-pilot"
   repo_root = abspath("${path.module}/..")
 
   source_files = setunion(
     fileset(local.repo_root, "**/*.go"),
     fileset(local.repo_root, "go.mod"),
     fileset(local.repo_root, "go.sum"),
-    fileset(local.repo_root, "Dockerfile")
+    fileset(local.repo_root, "Dockerfile"),
+    fileset(local.repo_root, ".dockerignore")
   )
 
   source_hash = sha256(join("", [
@@ -25,15 +26,17 @@ module "go_test_lambda" {
   source  = "terraform-aws-modules/lambda/aws"
   version = "8.8.0"
 
-  function_name  = local.name
-  description    = "go test"
-  create_package = false
+  function_name             = local.name
+  description               = "go test"
+  create_package            = false
+  role_name                 = "example-go-pilot-lambda"
+  role_permissions_boundary = "arn:aws:iam::138013422358:policy/example-go-pilot-lambda-boundary"
 
   image_uri    = module.go_test_build.image_uri
   package_type = "Image"
 
-  timeout     = 900
-  memory_size = 1024
+  timeout     = 30
+  memory_size = 128
 
   # allowed_triggers = {
   #   MFLSync = {
@@ -48,8 +51,6 @@ module "go_test_lambda" {
   # }
 
   attach_cloudwatch_logs_policy = true
-  attach_policy_json            = true
-  policy_json                   = data.aws_iam_policy_document.lambda_policy_doc.json
 
   tags = data.context_tags.backend.tags
 }
