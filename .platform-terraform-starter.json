@@ -1,0 +1,15 @@
+{
+  "base_sha": "06c322345698807832f0582b68c92525c3285616",
+  "config": {
+    "terraform_version": "1.15.0",
+    "workflow_ref": "c46168073f7f968cfe6f9f7e26b1fcc7ab0708fd",
+    "working_directory": "terraform"
+  },
+  "fingerprint": "438497fc9860e7ebbb373b84aa9358efb68b9dfd420e55ae356ef3e877ab0e7a",
+  "inventory_key": "example_go_pilot",
+  "repository_id": 1416571064,
+  "schema_version": 1,
+  "source_ref": "v0.1.0-rc.4",
+  "source_run": "https://github.com/tyler180/github-infra/actions/runs/38497108794",
+  "source_sha": "83b144ac485786c842259d84596b090368e0ec76"
+}
