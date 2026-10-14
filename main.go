@@ -18,6 +18,7 @@ func main() {
 	flag.Parse()
 	fmt.Println(greeting(*name))
 	fmt.Println("testing a change")
+	fmt.Println("testing another change")
 }
 
 type greetingRequest struct {
