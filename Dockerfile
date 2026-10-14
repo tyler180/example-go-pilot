@@ -12,6 +12,7 @@ COPY . .
 
 # Build a statically linked binary
 RUN CGO_ENABLED=0 GOOS=linux go build \
+    -tags lambda.norpc \
     -trimpath \
     -ldflags="-s -w" \
     -o /app/server .
@@ -23,9 +24,6 @@ WORKDIR /app
 
 # Copy compiled binary
 COPY --from=builder /app/server /app/server
-
-# Document application port (adjust as needed)
-EXPOSE 8080
 
 # Run application
 ENTRYPOINT ["/app/server"]

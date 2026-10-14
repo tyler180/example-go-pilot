@@ -71,7 +71,7 @@ provider "context" {
 
   values = {
     environment = "dev"
-    name        = basename(dirname(path.cwd))
+    name        = "example-go-pilot"
     # name = abspath("${path.module}/..")
   }
 }

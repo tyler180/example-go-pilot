@@ -2,6 +2,18 @@ package main
 
 import "testing"
 
+func TestLambdaGreeting(t *testing.T) {
+	for _, name := range []string{"Terraform pilot", "", "  Tyler  "} {
+		response, err := handleGreeting(greetingRequest{Name: name})
+		if err != nil {
+			t.Fatal(err)
+		}
+		if response.Greeting != greeting(name) {
+			t.Fatalf("Lambda greeting = %q; want %q", response.Greeting, greeting(name))
+		}
+	}
+}
+
 // TestGreeting exercises the starter example. Update or replace these cases as
 // the application evolves; the platform requires passing tests, not this greeting.
 func TestGreeting(t *testing.T) {
